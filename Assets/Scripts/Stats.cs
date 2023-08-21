@@ -35,7 +35,7 @@ public class Stats : MonoBehaviour {
 	}
 
 	public void ModifyHealth(float value) {
-		_health -= value;
+		_health += value;
 
 		if (_health <= 0)
 			Destroy(gameObject);
