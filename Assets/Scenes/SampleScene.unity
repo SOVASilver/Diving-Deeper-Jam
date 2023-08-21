@@ -259,15 +259,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de41988910b4a27468d56af24d5ae505, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 0
+  _maxHealth: 10
   _speed: 0
   _accuracy: 100
+  _onlyMeleeWeapon: {fileID: -2802865969628002954, guid: 56e289eb10e8a154fb9b5a4266343e75, type: 3}
   _mutations:
-  - rid: 4455860409154142222
-  references:
-    version: 2
-    RefIds:
-    - rid: 4455860409154142222
-      type: {class: HandsDystrophy, ns: , asm: Assembly-CSharp}
-      data:
-        _name: HandsDystrophy
+  - {fileID: 5471107588526659952, guid: bea49d8389e5be7419d9a1dbdf2d692e, type: 3}

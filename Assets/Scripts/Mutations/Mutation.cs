@@ -1,8 +1,7 @@
 using System;
+using UnityEngine;
 
-[Serializable]
-public abstract class Mutation {
-	public string _name = "base";
-
+public abstract class Mutation : MonoBehaviour {
+	public string MutationName { get; protected set; }
 	public abstract void ModifyStats(Stats stats);
 }
