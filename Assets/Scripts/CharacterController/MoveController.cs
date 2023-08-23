@@ -38,7 +38,7 @@ public class MoveController : MonoBehaviour {
 			_target = new Vector2(Mathf.MoveTowards(transform.position.x, _path[_path.Length - 1].x, _speed * Time.fixedDeltaTime), Mathf.MoveTowards(transform.position.y, _path[_path.Length - 1].y, _speed * Time.fixedDeltaTime));
 			_rb.MovePosition(_target);
 
-			if (Mathf.Round(_rb.position.x) == _path[_path.Length - 1].x && Mathf.Round(_rb.position.y) == _path[_path.Length - 1].y)
+			if (_rb.position.x == _path[_path.Length - 1].x && _rb.position.y == _path[_path.Length - 1].y)
 				_path.RemoveAt(_path.Length - 1);
 		}
 

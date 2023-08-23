@@ -43,9 +43,10 @@ public class PathFinding : MonoBehaviour {
 	}*/
 
 	public void FindPath(int2 startPosition, int2 endPosition, NativeList<int2> path) {
-		FindPathJob findPathJob = new FindPathJob { 
+		FindPathJob findPathJob = new FindPathJob {
 			startPosition = startPosition,
 			endPosition = endPosition,
+			obstacles = ObstacleManager.obstacles,
 			path = path
 		};
 		findPathJob.Run();
@@ -55,6 +56,7 @@ public class PathFinding : MonoBehaviour {
 	private struct FindPathJob : IJob {
 		public int2 startPosition;
 		public int2 endPosition;
+		public NativeArray<int2> obstacles;
 		public NativeList<int2> path;
 
 		public void Execute() {
@@ -71,7 +73,7 @@ public class PathFinding : MonoBehaviour {
 					pathNode.gCost = int.MaxValue;
 					pathNode.hCost = CalculateDistanceCost(pathNode.position, endPosition);
 					pathNode.CalculateFCost();
-					pathNode.isWalkable = true;
+					pathNode.isWalkable = !obstacles.Contains(new int2(x, y));
 					pathNode.cameFromIndex = -1;
 
 					pathNodeArray[pathNode.index] = pathNode;
@@ -151,7 +153,7 @@ public class PathFinding : MonoBehaviour {
 
 			}
 			else {
-				CalculatePath(pathNodeArray, endNode, ref path);
+				CalculatePath(pathNodeArray, endNode);
 			}
 
 			pathNodeArray.Dispose();
@@ -183,7 +185,7 @@ public class PathFinding : MonoBehaviour {
 			return lowestCostPathNode.index;
 		}
 
-		private void CalculatePath(NativeArray<PathNode> pathNodeArray, PathNode endNode, ref NativeList<int2> path) {
+		private void CalculatePath(NativeArray<PathNode> pathNodeArray, PathNode endNode) {
 			if (endNode.cameFromIndex == -1) {
 				path.Clear();
 			}
