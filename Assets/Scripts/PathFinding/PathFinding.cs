@@ -48,7 +48,7 @@ public class PathFinding : MonoBehaviour {
 			endPosition = endPosition,
 			path = path
 		};
-		findPathJob.Schedule();
+		findPathJob.Run();
 	}
 
 	[BurstCompile]
@@ -86,15 +86,15 @@ public class PathFinding : MonoBehaviour {
 
 			NativeList<int> openList = new(Allocator.Temp);
 			NativeList<int> closedList = new(Allocator.Temp);
-			NativeArray<int2> neighbourOffsetArray = new(8, Allocator.Temp);
+			NativeArray<int2> neighbourOffsetArray = new(4, Allocator.Temp);
 			neighbourOffsetArray[0] = new int2(-1, 0);
 			neighbourOffsetArray[1] = new int2(1, 0);
 			neighbourOffsetArray[2] = new int2(0, -1);
 			neighbourOffsetArray[3] = new int2(0, 1);
-			neighbourOffsetArray[4] = new int2(-1, -1);
+			/*neighbourOffsetArray[4] = new int2(-1, -1);
 			neighbourOffsetArray[5] = new int2(-1, 1);
 			neighbourOffsetArray[6] = new int2(1, -1);
-			neighbourOffsetArray[7] = new int2(1, 1);
+			neighbourOffsetArray[7] = new int2(1, 1);*/
 
 			openList.Add(startNode.index);
 			while (openList.Length > 0) {
@@ -153,9 +153,6 @@ public class PathFinding : MonoBehaviour {
 			else {
 				CalculatePath(pathNodeArray, endNode, ref path);
 			}
-
-			if (!path.IsEmpty)
-				path.Reverse();
 
 			pathNodeArray.Dispose();
 			openList.Dispose();
