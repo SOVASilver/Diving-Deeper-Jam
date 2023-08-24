@@ -8,7 +8,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class MoveController : MonoBehaviour {
 	private NativeList<int2> _path;
-	private float _speed = 8;
+	private float _speed = 12;
 	private Vector2 _target;
 	[SerializeField] private PathFinding _pathFinding;
 	[SerializeField] private Rigidbody2D _rb;

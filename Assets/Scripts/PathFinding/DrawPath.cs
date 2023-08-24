@@ -17,12 +17,14 @@ public class DrawPath : MonoBehaviour {
 			Delete();
 			Draw();
 		}
+		else if (_characterManager.unit != gameObject)
+			Delete();
 	}
 
 	private void Draw() {
 		if(!_pathFinding.path.IsEmpty) {
 			foreach (int2 node in _pathFinding.path) {
-				_prefabs.Add(Instantiate(_prefab, new Vector2(node.x, node.y), Quaternion.identity));
+				_prefabs.Add(Instantiate(_prefab, new Vector2(node.x, node.y), Quaternion.identity, _characterManager.transform));
 			}
 		}
 	}
