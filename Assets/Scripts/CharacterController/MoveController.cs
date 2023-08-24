@@ -15,7 +15,6 @@ public class MoveController : MonoBehaviour {
 	[SerializeField] private CharacterManager _characterManager;
 
 	private void OnMouseDown() {
-		Debug.Log("I'm Working!");
 		_characterManager.unit = gameObject;
 	}
 
@@ -27,7 +26,7 @@ public class MoveController : MonoBehaviour {
 		if (_characterManager.unit == gameObject) {
 			if (Input.GetMouseButtonDown(1)) {
 				float startTime = Time.realtimeSinceStartup;
-				_pathFinding.FindPath(new int2(GetRoundToIntPosition(_rb.position)), new int2(GetRoundToIntPosition(GetMousePosition())), _path);
+				_path.CopyFrom(_pathFinding.path);
 				Debug.Log((Time.realtimeSinceStartup - startTime) * 1000);
 			}
 		}

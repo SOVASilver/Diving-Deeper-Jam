@@ -8,41 +8,17 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 public class PathFinding : MonoBehaviour {
-	//private NativeList<int2> _path;
-	private readonly System.Random _random = new();
+	public NativeList<int2> path;
 
-	/*private void Start() {
-		_path = new(Allocator.Persistent);
-
-		float startTime = Time.realtimeSinceStartup;
-
-		FindPath(new int2(0, 0), new int2(7, 3));
-
-		_time = (Time.realtimeSinceStartup - startTime) * 1000f;
-		Debug.Log(_time);
+	public void Awake() {
+		path = new NativeList<int2>(Allocator.Persistent);
 	}
 
-	private void FixedUpdate() {
-		if (Input.GetKey(KeyCode.S))
-			this.gameObject.SetActive(false);
-
-		if (Input.GetKey(KeyCode.D)) {
-			float startTime = Time.realtimeSinceStartup;
-
-			FindPath(new int2(_random.Next(0, 24), _random.Next(0, 24)), new int2(_random.Next(0, 24), _random.Next(0, 24)));
-
-			_time = (Time.realtimeSinceStartup - startTime) * 1000f;
-
-			Debug.Log(_time);
-		}
+	public void OnDisable() {
+		path.Dispose();
 	}
 
-	private void OnDisable() {
-		Debug.Log("I'm dispose");
-		_path.Dispose();
-	}*/
-
-	public void FindPath(int2 startPosition, int2 endPosition, NativeList<int2> path) {
+	public void FindPath(int2 startPosition, int2 endPosition) {
 		FindPathJob findPathJob = new FindPathJob {
 			startPosition = startPosition,
 			endPosition = endPosition,
