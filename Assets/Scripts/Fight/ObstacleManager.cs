@@ -9,8 +9,8 @@ public class ObstacleManager : MonoBehaviour {
 		obstacles = new NativeList<int2>(Allocator.Persistent);
 		GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Obstacle");
 
-		for (int x = 0; x < 25; x++) {
-			for (int y = 0; y < 25; y++) {
+		for (int x = 0; x < 34; x++) {
+			for (int y = 0; y < 15; y++) {
 				foreach (GameObject gameObject in gameObjects) {
 					if (gameObject.GetComponent<BoxCollider2D>().bounds.Contains(new Vector2(x, y)))
 						obstacles.Add(new int2(x, y));

@@ -35,13 +35,13 @@ public class PathFinding : MonoBehaviour {
 		public void Execute() {
 			path.Clear();
 
-			NativeArray<PathNode> pathNodeArray = new(25 * 25, Allocator.Temp);
+			NativeArray<PathNode> pathNodeArray = new(34 * 15, Allocator.Temp);
 
-			for (int x = 0; x < 25; x++) {
-				for (int y = 0; y < 25; y++) {
+			for (int x = 0; x < 34; x++) {
+				for (int y = 0; y < 15; y++) {
 					PathNode pathNode = new();
 					pathNode.position = new(x, y);
-					pathNode.index = CalculateIndex(pathNode.position, 25);
+					pathNode.index = CalculateIndex(pathNode.position, 34);
 
 					pathNode.gCost = int.MaxValue;
 					pathNode.hCost = CalculateDistanceCost(pathNode.position, endPosition);
@@ -53,8 +53,8 @@ public class PathFinding : MonoBehaviour {
 				}
 			}
 
-			int endNodeIndex = CalculateIndex(endPosition, 25);
-			PathNode startNode = pathNodeArray[CalculateIndex(startPosition, 25)];
+			int endNodeIndex = CalculateIndex(endPosition, 34);
+			PathNode startNode = pathNodeArray[CalculateIndex(startPosition, 34)];
 			startNode.gCost = 0;
 			startNode.CalculateFCost();
 			pathNodeArray[startNode.index] = startNode;
@@ -93,11 +93,11 @@ public class PathFinding : MonoBehaviour {
 					int2 neighbourOffset = neighbourOffsetArray[i];
 					int2 neighbourPosition = new(currentNode.position.x + neighbourOffset.x, currentNode.position.y + neighbourOffset.y);
 
-					if (!IsPositionInsideGrid(neighbourPosition, new int2(25, 25))) {
+					if (!IsPositionInsideGrid(neighbourPosition, new int2(34, 15))) {
 						continue;
 					}
 
-					int neighbourNodeIndex = CalculateIndex(neighbourPosition, 25);
+					int neighbourNodeIndex = CalculateIndex(neighbourPosition, 34);
 					if (closedList.Contains(neighbourNodeIndex)) {
 						continue;
 					}
